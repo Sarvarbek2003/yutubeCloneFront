@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/material-design-iconic-font.css">
+    <link rel="stylesheet" href="./css/material-design-iconic-font.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper sign-in">
+            <form action="/" class="site-form">
+                <h1 class="title">Sign in</h1>
+                <span id="invalid_date"></span>
+                <label>
+                    <span class="zmdi zmdi-account"></span>
+                    <input type="text" id="usernameInput" placeholder="Your name">
+                </label>
+                <label>
+                    <span class="zmdi zmdi-lock"></span>
+                    <input type="password" id="passwordInput" placeholder="Password">
+                    <button class="zmdi zmdi-eye" id="showButton" type="button"></button>
+                </label>
+                <input type="submit" value="Log in" id="submitButton">
+            </form>
+            <a href="/register" class="sign-link">Create an account</a>
+            <img src="img/signin-image.jpg" alt="signin-image" class="signin-image">
+        </div>
+    </div>
+    <script src="./js/util.js"></script>
+    <script src="./js/login.js"></script>
+</body>
+
+</html>
