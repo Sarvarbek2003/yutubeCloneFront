@@ -1,4 +1,4 @@
-const backendApi = 'http://localhost:4000'
+const backendApi = 'https://yutube-clon.herokuapp.com'
 
 async function request (route, method, body) {
 	let headers = {
