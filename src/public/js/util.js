@@ -16,6 +16,7 @@ async function request (route, method, body) {
 	})
 
 	if(!(response.status === 200 || response.status === 201)) {
+		response = await response.json()
 		throw new Error(response.message)
 	}
 
