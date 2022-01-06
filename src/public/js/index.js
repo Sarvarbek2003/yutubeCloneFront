@@ -10,31 +10,30 @@ let bt = document.querySelector('.hover-after')
 const voice = new window.webkitSpeechRecognition()
 voice.lang = 'en-EN'
 
-micrafon.addEventListener('click', () => {
-	console.log("booo")
+micrafon.addEventListener('click', (event) => {
+	event.preventDefault()
 	voice.start()
+	input.placeholder = "Eshityabman"
 })
 
 voice.onspeechstart = () => {
-	console.log("Eshityabman...")
 }
 
 voice.onsoundend = () => {
-	console.log("stop..")
+	input.placeholder = "stop"
 }
 
 voice.onresult = (event) => {
 	let result = event.results[0][0].transcript
-	voise.value = result
-	console.log(result)
-	// game(result)
-	// window.location = `https://api.telegram.org/bot${token}/sendMessage?chat_id=887528138&text=${result}`
+	setTimeout(async() => {
+		input.value = result
+		let data = await request('/vidio')
+		let res = data.filter(video => video.vidioTitle.includes(input.value))
+			vidList.innerHTML = null
+			renderVidios(0, res)
+			dataList2(res)
+	}, 500);
 }
-
-
-
-
-
 
 
 let profilePhoto = document.querySelector('.avatar-img')
@@ -75,18 +74,20 @@ async function renderUsers(){
 	
 }
 
-async function renderVidios(arg){
+async function renderVidios(arg=0,filter = []){
 	let vid = []
 	let vidio = await request('/vidio')
 	let users = await request('/users')
 	let photos = await request('/images','POST')
-	if(arg != 0){
+	if (filter.length) vidio = filter
+	
+	if(arg != 0 ){
 		vid = vidio.filter( vid => +vid.userId == +arg)
 	}else{
 		vid = vidio
 	}
-
-
+	
+	vidList.innerHTML = null
 	vid.forEach(vidio => {
 		const [
 			li,
@@ -131,13 +132,16 @@ async function renderVidios(arg){
 		vidList.append(li)
 		
 	})
+		filterVidio(vid)
+		dataList2(vid)
 	
 }
 
 
 let datalist = document.querySelector('#datalist')
-async function dataList2(){
+async function dataList2(arg = []){
 	let vidios = await request('/vidio')
+	if (arg.length) vidios = arg
 	let htmlDataset = ``
 	vidios.forEach(video => {
 		htmlDataset += `<option value="${video.vidioTitle}">`
@@ -145,12 +149,17 @@ async function dataList2(){
 	datalist.innerHTML = htmlDataset;
 }	
 
-createVideo.addEventListener('click', async el => {
-	let vidios = await request('/vidio')
-	let res = vidios.find(video => video.vidioTitle.includes(input.value))
-	console.log(res)
+async function filterVidio (data){
+	createVideo.addEventListener('click', async el => {
+		el.preventDefault()
+		let res = data.filter(video => video.vidioTitle.includes(input.value))
+		vidList.innerHTML = null
+		voise.value = null
+		renderVidios(0, res)
+		dataList2(res)
+	}) 
+}
 
-}) 
 
 salom.onclick = () =>{
 	window.location = "/admin"
