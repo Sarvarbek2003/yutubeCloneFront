@@ -1,4 +1,5 @@
 let btn = document.querySelector('.site-form')
+let show = true
 
 showButton.onclick = () =>{
 	if (show){
