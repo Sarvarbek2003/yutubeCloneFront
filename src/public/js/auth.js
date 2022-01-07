@@ -2,7 +2,7 @@
 	let token = window.localStorage.getItem('token')
 	if(token) {
 		try {
-			await request('/users')
+			await request('/ath')
 			if(!(window.location.pathname == '/') && !(window.location.pathname == '/admin')) {
 				window.location = '/'
 			}
