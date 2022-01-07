@@ -3,7 +3,7 @@
 	if(token) {
 		try {
 			await request('/ath')
-			if(!(window.location.pathname == '/') || !(window.location.pathname == '/admin')) {
+			if(!(window.location.pathname == '/') && !(window.location.pathname == '/admin')) {
 				window.location = '/'
 			}
 		} catch(error) {
