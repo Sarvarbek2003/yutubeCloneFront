@@ -88,7 +88,6 @@ async function renderVidios(arg=0,filter = []){
 	}else{
 		vid = vidio
 	}
-	console.log(vid)
 	vidList.innerHTML = null
 	vid.forEach(vidio => {
 		const [
