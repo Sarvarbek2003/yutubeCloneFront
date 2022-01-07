@@ -6,6 +6,8 @@ let input = document.querySelector('.search-input ')
 
 let bt = document.querySelector('.hover-after')
 
+let dataVidio = []
+
 
 const voice = new window.webkitSpeechRecognition()
 voice.lang = 'en-EN'
@@ -86,7 +88,7 @@ async function renderVidios(arg=0,filter = []){
 	}else{
 		vid = vidio
 	}
-	
+	console.log(vid)
 	vidList.innerHTML = null
 	vid.forEach(vidio => {
 		const [
@@ -132,7 +134,7 @@ async function renderVidios(arg=0,filter = []){
 		vidList.append(li)
 		
 	})
-		filterVidio(vid)
+		dataVidio = vid
 		dataList2(vid)
 	
 }
@@ -149,16 +151,15 @@ async function dataList2(arg = []){
 	datalist.innerHTML = htmlDataset;
 }	
 
-async function filterVidio (data){
-	createVideo.addEventListener('click', async el => {
-		el.preventDefault()
-		let res = data.filter(video => video.vidioTitle.includes(input.value))
-		vidList.innerHTML = null
-		voise.value = null
-		renderVidios(0, res)
-		dataList2(res)
-	}) 
-}
+
+createVideo.addEventListener('click', async el => {
+	el.preventDefault()
+	let res = dataVidio.filter(video => video.vidioTitle.includes(input.value))
+	voise.value = null
+	renderVidios(0, res)
+	dataList2(res)
+}) 
+
 
 
 salom.onclick = () =>{
